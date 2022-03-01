@@ -5,8 +5,10 @@ export default makeStyles(() => ({
         width: "5rem",
         height: "5rem",
     },
-    list: {
-
+    buttonEdit: {
+        marginTop: "auto",
+        marginBottom: "auto",
+        marginLeft: "-1rem",
     },
     listItem:{
         width: '100%',

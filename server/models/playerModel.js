@@ -8,6 +8,7 @@ const playerSchema = new Schema({
     position: String,
     projPoints: Number,
     selectedFile: String,
+    starter: Boolean,
 })
 
 const PlayerModel = mongoose.model('playerModel', playerSchema);

@@ -26,10 +26,13 @@ const Form = ({currentId, setCurrentId}) => {
             dispatch(createPlayer(playerData));
         }
 
+        clear();
+
     }
 
     const clear = () =>{
-
+        setPlayerData({name: '',number: '',team:'',position:'',projPoints: '',selectedFile: ''});
+        setCurrentId(null);
     }
 
     return (

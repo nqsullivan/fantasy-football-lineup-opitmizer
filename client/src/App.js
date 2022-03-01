@@ -14,13 +14,13 @@ import { getTeam } from './actions/team';
 import { useDispatch } from "react-redux";
 
 const App = () => {
-    const [currentId, setCurrentId] = useState(null);
+    const [currentId, setCurrentId ] = useState(null);
     const classes = useStyles();
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(getTeam());
-    }, [currentId, dispatch])
+    }, [currentId, dispatch ])
 
 
     return(

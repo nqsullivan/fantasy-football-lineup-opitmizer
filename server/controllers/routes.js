@@ -25,17 +25,23 @@ export const createPlayer = async (req, res) => {
     }
 }
 
-export const editPlayer = (req, res) => {
-
-}
-
 export const updatePlayer = async (req, res) => {
     const {id: _id} = req.params;
+    const player = req.body;
 
     if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('No player with that id');
 
-    const updatedTeam = PlayerModel.findByIdAndUpdate(_id, team, { new: true});
+    const updatedTeam = await PlayerModel.findByIdAndUpdate(_id, player, { new: true });
 
     res.json(updatedTeam);
 }
 
+export const deletePlayer = async (req, res) => {
+    const {id: _id} = req.params;
+
+    if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('No player with that id');
+
+    await PlayerModel.findByIdAndDelete(_id);
+
+    res.json({message: 'Player Deleted'});
+}

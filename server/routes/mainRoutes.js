@@ -1,12 +1,12 @@
 import express from 'express';
 
-import { getTeam, createPlayer, editPlayer, updatePlayer } from '../controllers/routes.js';
+import {getTeam, createPlayer, updatePlayer, deletePlayer} from '../controllers/routes.js';
 
 const router = express.Router();
 
 router.get('/', getTeam);
 router.post('/', createPlayer);
-router.patch('/', editPlayer);
 router.patch('/:id', updatePlayer);
+router.delete('/:id', deletePlayer);
 
 export default router;
