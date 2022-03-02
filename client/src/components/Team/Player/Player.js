@@ -11,9 +11,9 @@ import {
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import useStyles from './styles';
 import {useDispatch} from "react-redux";
-import { deletePlayer } from "../../../actions/team";
+import { deletePlayer, makeStarter, makeBench } from "../../../actions/team";
 
-const Player = ({ player, setCurrentId  }) => {
+const Player = ({ player, setCurrentId }) => {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
@@ -51,7 +51,7 @@ const Player = ({ player, setCurrentId  }) => {
                 }}
             >
                 <MenuItem onClick={() => setCurrentId(player._id)}>Edit Player</MenuItem>
-                <MenuItem onClick={handleClose}>Make starter</MenuItem>
+                <MenuItem onClick={() => {!player.starter ? dispatch(makeStarter(player._id)): dispatch(makeBench(player._id))}}>Make {player.starter ? 'bench' : 'starter'}</MenuItem>
                 <MenuItem onClick={() => {dispatch(deletePlayer(player._id))}}>Delete</MenuItem>
             </Menu>
             <Typography className={ classes.liText} variant="h5">

@@ -20,7 +20,7 @@ const App = () => {
 
     useEffect(() => {
         dispatch(getTeam());
-    }, [currentId, dispatch ])
+    }, [ currentId, dispatch ])
 
 
     return(
@@ -28,7 +28,7 @@ const App = () => {
             <AppBar className = {classes.appBar} position='fixed'>
                 <Grid container justifyContent={'space-between'} alignItems="stretch">
                     <Grid item>
-                        <Box sx={{my: "1rem"}}>
+                        <Box sx={{ my: "1rem" }}>
                             <Typography className = {classes.heading} variant ="h2" >Fantasy Football Lineup Optimizer</Typography>
                         </Box>
                     </Grid>

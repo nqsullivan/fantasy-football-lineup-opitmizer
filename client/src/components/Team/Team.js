@@ -7,36 +7,37 @@ import {
     Box,
     CircularProgress,
     Divider,
-    List,
+    List, Typography,
 } from "@material-ui/core";
 
 const Team = ({setCurrentId}) => {
     const team = useSelector((state) => state.team);
     const classes = useStyles();
 
-    console.log(team);
-
     return (
         !team.length ? <CircularProgress /> : (
             <Box>
-                <List container className={classes.list} >
+                <Box>
+                    <Typography align="center" variant={"h5"}>
+                        Starters
+                    </Typography>
+                </Box>
+                <List className={classes.list} >
                     {team.filter((player) => player.starter).map((player) =>(
                         <React.Fragment key={player._id}>
-                            <Player player={player} setCurrentId={setCurrentId}/>
+                            <Player player={player} setCurrentId={setCurrentId} starter={true}/>
                             <Divider/>
                         </React.Fragment>
                     ))}
                 </List>
                 <p/>
-                <Divider />
-                <p/>
-                <Divider />
-                <p/>
-                <Divider />
-                <List container className={classes.list} >
+                <Typography align="center" variant={"h5"}>
+                    Bench
+                </Typography>
+                <List className={classes.list} >
                     {team.filter((player) => !player.starter).map((player) =>(
                         <React.Fragment key={player._id}>
-                            <Player player={player} setCurrentId={setCurrentId}/>
+                            <Player player={player} setCurrentId={setCurrentId} starter={false}/>
                             <Divider/>
                         </React.Fragment>
                     ))}
