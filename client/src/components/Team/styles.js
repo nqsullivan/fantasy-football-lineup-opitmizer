@@ -15,4 +15,7 @@ export default makeStyles((theme) => ({
         width: '100%',
         maxWidth: 'lg',
     },
+    starterBenchHeading: {
+        align: 'center',
+    }
 }));

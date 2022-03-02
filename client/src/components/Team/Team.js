@@ -7,7 +7,7 @@ import {
     Box,
     CircularProgress,
     Divider,
-    List,
+    List, Typography,
 } from "@material-ui/core";
 
 const Team = ({setCurrentId}) => {
@@ -17,6 +17,11 @@ const Team = ({setCurrentId}) => {
     return (
         !team.length ? <CircularProgress /> : (
             <Box>
+                <Box>
+                    <Typography align="center" variant={"h5"}>
+                        Starters
+                    </Typography>
+                </Box>
                 <List className={classes.list} >
                     {team.filter((player) => player.starter).map((player) =>(
                         <React.Fragment key={player._id}>
@@ -26,11 +31,9 @@ const Team = ({setCurrentId}) => {
                     ))}
                 </List>
                 <p/>
-                <Divider />
-                <p/>
-                <Divider />
-                <p/>
-                <Divider />
+                <Typography align="center" variant={"h5"}>
+                    Bench
+                </Typography>
                 <List className={classes.list} >
                     {team.filter((player) => !player.starter).map((player) =>(
                         <React.Fragment key={player._id}>
