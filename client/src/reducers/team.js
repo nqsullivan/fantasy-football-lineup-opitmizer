@@ -9,7 +9,7 @@ export default (team = [], action) => {
         case CREATE:
             return [...team,action.payload];
         case DELETE:
-            return team;
+            return team.filter((post) => post._id !== action.payload)
         default:
             return team;
     }
