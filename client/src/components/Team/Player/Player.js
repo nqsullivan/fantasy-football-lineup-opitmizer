@@ -62,7 +62,7 @@ const Player = ({ player, setCurrentId }) => {
             </ListItemAvatar>
             <ListItemText className={ classes.liText} primary={player.name + " #" + player.number} secondary={player.team} variant="h7"/>
             <Typography className={ classes.liText} variant="h5">
-                {player.projPoints % 1 === 0 ? player.projPoints+ ".0": player.projPoints}
+                {player.projPoints.toFixed(1)}
             </Typography>
         </ListItem>
     )
