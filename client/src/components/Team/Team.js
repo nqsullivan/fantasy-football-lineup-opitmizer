@@ -17,19 +17,21 @@ const Team = ({setCurrentId}) => {
     return (
         !team.length ? <CircularProgress /> : (
             <Box>
-                <Box>
-                    <Typography align="center" variant={"h5"}>
-                        Starters
-                    </Typography>
-                </Box>
+                <Typography align="center" variant={"h5"}>
+                    Starters
+                </Typography>
+
                 <List className={classes.list} >
                     {team.filter((player) => player.starter).map((player) =>(
                         <React.Fragment key={player._id}>
-                            <Player player={player} setCurrentId={setCurrentId} starter={true}/>
+                            <Player player={player} setCurrentId={setCurrentId}/>
                             <Divider/>
                         </React.Fragment>
                     ))}
                 </List>
+                <Typography className={classes.totalPoints} align="right" variant={'h5'}>
+                    Total Projected Points: {team.filter((player) => player.starter).reduce((total, player) => total + player.projPoints, 0).toFixed(2)}
+                </Typography>
                 <p/>
                 <Typography align="center" variant={"h5"}>
                     Bench

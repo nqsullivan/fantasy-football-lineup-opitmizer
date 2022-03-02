@@ -17,5 +17,10 @@ export default makeStyles((theme) => ({
     },
     starterBenchHeading: {
         align: 'center',
+    },
+    totalPoints: {
+        align:'right',
+        paddingRight: "2.5rem",
+        backgroundColor: "white",
     }
 }));
