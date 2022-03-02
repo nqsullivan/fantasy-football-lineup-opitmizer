@@ -4,7 +4,6 @@ import mongoose from "mongoose";
 export const getTeam = async (req, res) => {
     try{
         const playerModel = await PlayerModel.find();
-        console.log(PlayerModel);
         res.status(200).json(playerModel);
     }catch(error){
         res.status(404).json({ message: error.message });
@@ -51,7 +50,21 @@ export const makeStarter = async (req,res) => {
 
     if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('No player with that id');
 
-    await PlayerModel.findByIdAndUpdate(_id);
+    const updatedPlayer = await PlayerModel.findById(_id);
 
-    res.json({message: 'Player Updated'});
+    await PlayerModel.findByIdAndUpdate(_id, {starter: updatedPlayer.starter = true});
+
+    res.json(updatedPlayer);
+}
+
+export const makeBench = async (req,res) => {
+    const {id: _id} = req.params;
+
+    if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('No player with that id');
+
+    const updatedPlayer = await PlayerModel.findById(_id);
+
+    await PlayerModel.findByIdAndUpdate(_id, {starter: updatedPlayer.starter = false});
+
+    res.json(updatedPlayer);
 }

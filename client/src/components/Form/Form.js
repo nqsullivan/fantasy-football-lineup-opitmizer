@@ -53,8 +53,8 @@ const Form = ({currentId, setCurrentId}) => {
                 <div className={classes.fileInput}>
                     <FileBase type={"file"} multiple={false} onDone={({base64}) => setPlayerData({...playerData, selectedFile: base64 })}/>
                 </div>
-                <FormGroup className={classes.checkBox}>
-                    <FormControlLabel control={<Checkbox  onChange={handleChange} label={'starter?'} inputProps={{ 'aria-label': 'controlled' }}/>} label="Label" />
+                <FormGroup>
+                    <FormControlLabel control={<Checkbox  onChange={handleChange} label={'starter?'} inputProps={{ 'aria-label': 'controlled' }}/>} label="Starter?" />
                 </FormGroup>
 
                 <Button className={classes.buttonSubmit} variant={"contained"} color={"primary"} size={"large"} type ="submit" fullWidth>Submit</Button>

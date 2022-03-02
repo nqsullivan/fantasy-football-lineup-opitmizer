@@ -14,15 +14,13 @@ const Team = ({setCurrentId}) => {
     const team = useSelector((state) => state.team);
     const classes = useStyles();
 
-    console.log(team);
-
     return (
         !team.length ? <CircularProgress /> : (
             <Box>
-                <List container className={classes.list} >
+                <List className={classes.list} >
                     {team.filter((player) => player.starter).map((player) =>(
                         <React.Fragment key={player._id}>
-                            <Player player={player} setCurrentId={setCurrentId}/>
+                            <Player player={player} setCurrentId={setCurrentId} starter={true}/>
                             <Divider/>
                         </React.Fragment>
                     ))}
@@ -33,10 +31,10 @@ const Team = ({setCurrentId}) => {
                 <Divider />
                 <p/>
                 <Divider />
-                <List container className={classes.list} >
+                <List className={classes.list} >
                     {team.filter((player) => !player.starter).map((player) =>(
                         <React.Fragment key={player._id}>
-                            <Player player={player} setCurrentId={setCurrentId}/>
+                            <Player player={player} setCurrentId={setCurrentId} starter={false}/>
                             <Divider/>
                         </React.Fragment>
                     ))}
