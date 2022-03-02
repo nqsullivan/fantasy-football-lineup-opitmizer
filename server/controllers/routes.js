@@ -45,3 +45,13 @@ export const deletePlayer = async (req, res) => {
 
     res.json({message: 'Player Deleted'});
 }
+
+export const makeStarter = async (req,res) => {
+    const {id: _id} = req.params;
+
+    if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('No player with that id');
+
+    await PlayerModel.findByIdAndUpdate(_id);
+
+    res.json({message: 'Player Updated'});
+}

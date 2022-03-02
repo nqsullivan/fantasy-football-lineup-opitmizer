@@ -1,5 +1,5 @@
 import * as api from '../api';
-import {CREATE, DELETE, FETCH_ALL, UPDATE} from "../constants/actionTypes";
+import {CREATE, DELETE, FETCH_ALL, MAKE_STARTER, UPDATE} from "../constants/actionTypes";
 
 export const getTeam = () => async (dispatch) => {
     try{
@@ -36,8 +36,18 @@ export const deletePlayer = (_id) => async (dispatch) => {
     try{
         await api.deletePlayer(_id);
         dispatch({type: DELETE, payload: _id});
-        getTeam();
     }catch (error){
         console.log(error);
     }
+}
+
+export const makeStarter = (_id) => async (dispatch) => {
+    try{
+        await api.makeStarter(_id);
+
+        dispatch({ type: MAKE_STARTER, payload: _id});
+    } catch (error) {
+        console.log(error);
+    }
+
 }
