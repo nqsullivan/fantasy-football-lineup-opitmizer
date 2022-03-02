@@ -4,11 +4,11 @@ import {useDispatch, useSelector} from 'react-redux';
 
 import useStyles from './styles';
 import { createPlayer, updatePlayer } from '../../actions/team';
-import {Button, Paper, TextField, Typography} from "@material-ui/core";
+import {Button, Checkbox, FormControlLabel, FormGroup, Paper, TextField, Typography} from "@material-ui/core";
 
 const Form = ({currentId, setCurrentId}) => {
 
-    const [playerData, setPlayerData] = useState({name: '',number: '',team:'',position:'',projPoints: '',selectedFile: ''});
+    const [playerData, setPlayerData] = useState({name: '',number: '',team:'',position:'',projPoints: '',selectedFile: '',starter: 'false'});
     const player = useSelector((state) => currentId ? state.team.find((p) => p._id === currentId) : null);
     const classes = useStyles();
     const dispatch = useDispatch();
@@ -30,8 +30,14 @@ const Form = ({currentId, setCurrentId}) => {
 
     }
 
+    const handleChange = (e) => {
+        e.preventDefault();
+
+        playerData.starter = !playerData.starter
+    }
+
     const clear = () =>{
-        setPlayerData({name: '',number: '',team:'',position:'',projPoints: '',selectedFile: ''});
+        setPlayerData({name: '',number: '',team:'',position:'',projPoints: '',selectedFile: '',starter: 'false'});
         setCurrentId(null);
     }
 
@@ -47,6 +53,10 @@ const Form = ({currentId, setCurrentId}) => {
                 <div className={classes.fileInput}>
                     <FileBase type={"file"} multiple={false} onDone={({base64}) => setPlayerData({...playerData, selectedFile: base64 })}/>
                 </div>
+                <FormGroup className={classes.checkBox}>
+                    <FormControlLabel control={<Checkbox  onChange={handleChange} label={'starter?'} inputProps={{ 'aria-label': 'controlled' }}/>} label="Label" />
+                </FormGroup>
+
                 <Button className={classes.buttonSubmit} variant={"contained"} color={"primary"} size={"large"} type ="submit" fullWidth>Submit</Button>
                 <Button variant={"contained"} color={"secondary"} size={"small"} onClick={clear} fullWidth>Clear</Button>
             </form>

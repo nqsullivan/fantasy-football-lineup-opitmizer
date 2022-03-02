@@ -4,6 +4,7 @@ import useStyles from "./styles";
 
 import Player from './Player/Player';
 import {
+    Box,
     CircularProgress,
     Divider,
     List,
@@ -17,15 +18,30 @@ const Team = ({setCurrentId}) => {
 
     return (
         !team.length ? <CircularProgress /> : (
-            <List className={classes.list} >
-                {team.map((player) => (
-                    <React.Fragment key={player._id}>
-                        <Player player={player} setCurrentId={setCurrentId}/>
-                        <Divider/>
-                    </React.Fragment>
-                ))}
-
-            </List>
+            <Box>
+                <List container className={classes.list} >
+                    {team.filter((player) => player.starter).map((player) =>(
+                        <React.Fragment key={player._id}>
+                            <Player player={player} setCurrentId={setCurrentId}/>
+                            <Divider/>
+                        </React.Fragment>
+                    ))}
+                </List>
+                <p/>
+                <Divider />
+                <p/>
+                <Divider />
+                <p/>
+                <Divider />
+                <List container className={classes.list} >
+                    {team.filter((player) => !player.starter).map((player) =>(
+                        <React.Fragment key={player._id}>
+                            <Player player={player} setCurrentId={setCurrentId}/>
+                            <Divider/>
+                        </React.Fragment>
+                    ))}
+                </List>
+            </Box>
         )
     )
 }
