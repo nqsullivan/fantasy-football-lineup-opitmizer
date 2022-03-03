@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const url = 'http://localhost:5000/team';
+//const url = 'http://localhost:5000/team';
+const url = 'https://fantasy-football-100.herokuapp.com/'
 
 export const fetchTeam = () => axios.get(url);
 export const createPlayer = (newPlayer) => axios.post(url, newPlayer);
