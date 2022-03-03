@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "An app to get fantasy football information",
   "main": "index.js",
+
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
+
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nqsullivan/fantasy-football-lineup-opitmizer.git"
