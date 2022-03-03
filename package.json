@@ -2,10 +2,10 @@
   "name": "fantasy-football-app",
   "version": "1.0.0",
   "description": "An app to get fantasy football information",
-  "main": "index.js",
+  "main": "./client/src/index.js",
 
   "scripts": {
-    "start": "node index.js"
+    "start": "nodemon ./server/index.js"
   },
 
   "repository": {

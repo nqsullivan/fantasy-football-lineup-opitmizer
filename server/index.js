@@ -9,8 +9,6 @@ import teamRoutes from './routes/mainRoutes.js'
 const app = express();
 dotenv.config();
 
-
-
 app.use(bodyParser.json({limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true}));
 app.use(cors());
@@ -22,10 +20,9 @@ app.get('/', (req, res) => {
 })
 
 const PORT = process.env.PORT || 5000;
-const CONNECTION_URL = process.env.CONNECTION_URL;
 
-mongoose.connect(CONNECTION_URL)
-    .then(() => app.listen(5000, () => console.log(`Server running on port: http://localhost:${PORT}`)))
-    .catch((error) => console.log(`${error} did not connect`));
+mongoose.connect(process.env.CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => app.listen(PORT, () => console.log(`Server running on port: http://localhost:${PORT}`)))
+    .catch((error) => console.log(error));
 
 mongoose.set('useFindAndModify', false);
