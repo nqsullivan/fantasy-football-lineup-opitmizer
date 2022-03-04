@@ -4,6 +4,7 @@
   "description": "An app to get fantasy football information",
   "main": "./client/src/index.js",
   "dependencies": {
+    "mongodb": "^4.4.1",
     "mongoose": "^6.2.4",
     "nodemon": "^2.0.15"
   },
