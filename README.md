@@ -5,8 +5,8 @@
 - [x] Main Page Layout
 - [x] Player Layout and Functionality
 - [x] Form Layout and Functionality
-- [ ] Add Bar to show total points from team and have an 'Optimize button'
-- [ ] Add Bench and Starters
+- [x] Add Bar to show total points from team
+- [x] Add Bench and Starters
+- [ ] Implement security and login for individual and concurrent users
 - [ ] Add constrains to starters (1 qb, 2 rb, ect.)
 - [ ] Add Optimization Feature for points
-- [ ] Implement security and login for individual and concurrent users
