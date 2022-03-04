@@ -1,0 +1,23 @@
+{
+  "name": "fantasy-football-app",
+  "version": "1.0.0",
+  "description": "An app to get fantasy football information",
+  "main": "./client/src/index.js",
+  "dependencies": {
+    "mongoose": "^6.2.4",
+    "nodemon": "^2.0.15"
+  },
+  "scripts": {
+    "start": "nodemon ./server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nqsullivan/fantasy-football-lineup-opitmizer.git"
+  },
+  "author": "Nathaniel Sullivan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nqsullivan/fantasy-football-lineup-opitmizer/issues"
+  },
+  "homepage": "https://github.com/nqsullivan/fantasy-football-lineup-opitmizer#readme"
+}
