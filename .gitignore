@@ -2,4 +2,5 @@
 /server/package-lock.json
 /server/node_modules/
 /server/.env
-server/fantasy-football-100
+/server/fantasy-football-100
+/node_modules

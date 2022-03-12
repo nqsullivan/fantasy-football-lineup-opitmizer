@@ -5,7 +5,8 @@
   "main": "./client/src/index.js",
   "dependencies": {
     "mongoose": "^6.2.4",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "prop-types": "^15.8.1"
   },
   "scripts": {
     "start": "nodemon ./server/index.js"

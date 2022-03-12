@@ -11,16 +11,16 @@ export const getTeam = async (req, res) => {
 }
 
 export const createPlayer = async (req, res) => {
-    const player = req.body;
+    const post = req.body;
 
-    const newPlayer = new PlayerModel(player);
+    const newPlayer = new PlayerModel({ ...post, userId: req.userId })
 
-    try{
+    try {
         await newPlayer.save();
 
         res.status(201).json(newPlayer);
-    }catch(error){
-        res.status(409).json({ message: error.message });
+    } catch (error) {
+        res.status(409).json({message: error.message});
     }
 }
 
