@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
-const { Schema } = mongoose;
 
-const playerSchema = new Schema({
+const playerSchema = new mongoose.Schema({
     name: String,
     number: Number,
     team: String,
@@ -9,8 +8,9 @@ const playerSchema = new Schema({
     projPoints: Number,
     selectedFile: String,
     starter: Boolean,
+    userId: String,
 })
 
-const PlayerModel = mongoose.model('playerModel', playerSchema);
+let PlayerModel =  mongoose.model('playerModel', playerSchema);
 
 export default PlayerModel;

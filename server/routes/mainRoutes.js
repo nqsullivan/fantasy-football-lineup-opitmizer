@@ -1,14 +1,15 @@
 import express from 'express';
 
-import {getTeam, createPlayer, updatePlayer, deletePlayer, makeStarter, makeBench} from '../controllers/routes.js';
+import {getTeam, createPlayer, updatePlayer, deletePlayer, makeStarter, makeBench} from '../controllers/team.js';
+import auth from '../middleware/auth.js';
 
 const router = express.Router();
 
-router.get('/', getTeam);
-router.post('/', createPlayer);
-router.patch('/:id', updatePlayer);
-router.delete('/:id', deletePlayer);
-router.patch('/:id/makeStarter', makeStarter);
-router.patch('/:id/makeBench', makeBench);
+router.get('/', auth, getTeam);
+router.post('/', auth, createPlayer);
+router.patch('/:id', auth, updatePlayer);
+router.delete('/:id', auth, deletePlayer);
+router.patch('/:id/makeStarter', auth, makeStarter);
+router.patch('/:id/makeBench', auth, makeBench);
 
 export default router;

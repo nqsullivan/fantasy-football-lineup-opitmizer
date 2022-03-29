@@ -12,8 +12,10 @@ export const getTeam = () => async (dispatch) => {
 }
 
 export const createPlayer = (player) => async (dispatch) => {
+    const user = JSON.parse(localStorage.getItem('profile'));
+
     try{
-        const { data }  = await api.createPlayer(player);
+        const { data }  = await api.createPlayer(player, user?.token);
 
         dispatch({ type: CREATE, payload: data })
     }catch (error){

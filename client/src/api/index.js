@@ -1,12 +1,21 @@
 import axios from "axios";
 
+//const API = axios.create({ baseUrl: 'http://localhost:5000' });
+const API = axios.create({ baseUrl: 'https://qccckh37ak.execute-api.us-east-2.amazonaws.com'})
 
-const url = 'https://fantasy-football-100.herokuapp.com/team';
-//const url = 'http://localhost:5000/team';
+API.interceptors.request.use((req) => {
+    if(localStorage.getItem('profile')) {
+        req.headers.Authorization = 'Bearer ' + JSON.parse(localStorage.getItem('profile')).token
+    }
+    return req;
+})
 
-export const fetchTeam = () => axios.get(url);
-export const createPlayer = (newPlayer) => axios.post(url, newPlayer);
-export const updatePlayer = (id, updatedPlayer) => axios.patch(`${url}/${id}`, updatedPlayer);
-export const deletePlayer = (id) => axios.delete(`${url}/${id}`);
-export const makeStarter = (id) => axios.patch(`${url}/${id}/makeStarter`);
-export const makeBench = (id) => axios.patch(`${url}/${id}/makeBench`);
+export const fetchTeam = () => API.get('/team');
+export const createPlayer = (newPlayer) => API.post('/team', newPlayer);
+export const updatePlayer = (id, updatedPlayer) => API.patch(`/team/${id}`, updatedPlayer);
+export const deletePlayer = (id) => API.delete(`/team/${id}`);
+export const makeStarter = (id) => API.patch(`/team/${id}/makeStarter`);
+export const makeBench = (id) => API.patch(`/team/${id}/makeBench`);
+
+export const login = (formData) => API.post('/user/login', formData);
+export const signup = (formData) => API.post('/user/signup', formData);

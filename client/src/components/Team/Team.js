@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useSelector } from "react-redux";
 import useStyles from "./styles";
 
@@ -7,15 +7,16 @@ import {
     Box,
     CircularProgress,
     Divider,
-    List, Typography,
+    List, Paper, Typography,
 } from "@material-ui/core";
 
 const Team = ({setCurrentId}) => {
-    const team = useSelector((state) => state.team);
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+    const team = useSelector((state) => state.team).filter((player) => player.userId === (user?.result?._id ? user?.result?._id: user?.result?.googleId));
     const classes = useStyles();
 
     return (
-        !team.length ? <CircularProgress /> : (
+        !team.length ? <Box><Paper><Typography align="center" variant={"h5"}>Please add a player to get started</Typography></Paper></Box>: (
             <Box>
                 <Typography align="center" variant={"h5"}>
                     Starters
@@ -47,6 +48,8 @@ const Team = ({setCurrentId}) => {
             </Box>
         )
     )
+
+
 }
 
 export default Team;
