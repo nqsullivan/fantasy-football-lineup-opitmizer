@@ -4,14 +4,10 @@ import useStyles from "./styles";
 
 import Player from './Player/Player';
 import {
-    Avatar,
-    Box, Button,
-    CircularProgress,
+    Box,
     Divider, Grid,
-    List, ListItem, ListItemAvatar, ListItemText, Menu, MenuItem, Paper, Typography,
+    List, ListItem,Paper, Typography,
 } from "@material-ui/core";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import {deletePlayer, makeBench, makeStarter} from "../../actions/team";
 
 const Team = ({setCurrentId}) => {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
@@ -49,10 +45,10 @@ const Team = ({setCurrentId}) => {
                         <ListItem className={classes.listItem}>
                             <Grid container alignItems="center">
                                 <Grid item container xs={2} md={2}>
-                                    <Typography item display={"inline"} className={ classes.liText} variant="h5">RB:</Typography>
+                                    <Typography display={"inline"} className={ classes.liText} variant="h5">RB:</Typography>
                                 </Grid>
                                 <Grid item container xs={10} md={10}>
-                                    <Typography item display={"inline"} className={ classes.liText}>Please add a Runningback</Typography>
+                                    <Typography display={"inline"} className={ classes.liText}>Please add a Runningback</Typography>
                                 </Grid>
                             </Grid>
                         </ListItem>}
@@ -64,10 +60,10 @@ const Team = ({setCurrentId}) => {
                         <ListItem className={classes.listItem}>
                             <Grid container alignItems="center">
                                 <Grid item container xs={2} md={2}>
-                                    <Typography item display={"inline"} className={ classes.liText} variant="h5">WR:</Typography>
+                                    <Typography display={"inline"} className={ classes.liText} variant="h5">WR:</Typography>
                                 </Grid>
                                 <Grid item container xs={10} md={10}>
-                                    <Typography item display={"inline"} className={ classes.liText}>Please add a Wide Receiver</Typography>
+                                    <Typography display={"inline"} className={ classes.liText}>Please add a Wide Receiver</Typography>
                                 </Grid>
                             </Grid>
                         </ListItem>}
@@ -79,25 +75,10 @@ const Team = ({setCurrentId}) => {
                         <ListItem className={classes.listItem}>
                             <Grid container alignItems="center">
                                 <Grid item container xs={2} md={2}>
-                                    <Typography item display={"inline"} className={ classes.liText} variant="h5">TE:</Typography>
+                                    <Typography display={"inline"} className={ classes.liText} variant="h5">TE:</Typography>
                                 </Grid>
                                 <Grid item container xs={10} md={10}>
-                                    <Typography item display={"inline"} className={ classes.liText}>Please add a Tight End</Typography>
-                                </Grid>
-                            </Grid>
-                        </ListItem>}
-                    {team.filter((player) => (player.starter && (player.position === 'K'))).length > 0 ? (team.filter((player) => (player.starter && (player.position === 'K'))).map((player) =>(
-                            <React.Fragment key={player._id}>
-                                <Player player={player} setCurrentId={setCurrentId}/>
-                                <Divider/>
-                            </React.Fragment>))) :
-                        <ListItem className={classes.listItem}>
-                            <Grid container alignItems="center">
-                                <Grid item container xs={2} md={2}>
-                                    <Typography item display={"inline"} className={ classes.liText} variant="h5">K:</Typography>
-                                </Grid>
-                                <Grid item container xs={10} md={10}>
-                                    <Typography item display={"inline"} className={ classes.liText}>Please add a Kicker</Typography>
+                                    <Typography display={"inline"} className={ classes.liText}>Please add a Tight End</Typography>
                                 </Grid>
                             </Grid>
                         </ListItem>}
@@ -109,14 +90,28 @@ const Team = ({setCurrentId}) => {
                         <ListItem className={classes.listItem}>
                             <Grid container alignItems="center">
                                 <Grid item container xs={2} md={2}>
-                                    <Typography item display={"inline"} className={ classes.liText} variant="h5">DEF:</Typography>
+                                    <Typography display={"inline"} className={ classes.liText} variant="h5">DEF:</Typography>
                                 </Grid>
                                 <Grid item container xs={10} md={10}>
-                                    <Typography item display={"inline"} className={ classes.liText}>Please add a Defensive Player</Typography>
+                                    <Typography display={"inline"} className={ classes.liText}>Please add a Defensive Player</Typography>
                                 </Grid>
                             </Grid>
                         </ListItem>}
-
+                    {team.filter((player) => (player.starter && (player.position === 'K'))).length > 0 ? (team.filter((player) => (player.starter && (player.position === 'K'))).map((player) =>(
+                            <React.Fragment key={player._id}>
+                                <Player player={player} setCurrentId={setCurrentId}/>
+                                <Divider/>
+                            </React.Fragment>))) :
+                        <ListItem className={classes.listItem}>
+                            <Grid container alignItems="center">
+                                <Grid item container xs={2} md={2}>
+                                    <Typography display={"inline"} className={ classes.liText} variant="h5">K:</Typography>
+                                </Grid>
+                                <Grid item container xs={10} md={10}>
+                                    <Typography display={"inline"} className={ classes.liText}>Please add a Kicker</Typography>
+                                </Grid>
+                            </Grid>
+                        </ListItem>}
                 </List>
                 <Typography className={classes.totalPoints} align="right" variant={'h5'}>
                     Total Projected Points: {team.filter((player) => player.starter).reduce((total, player) => total + player.projPoints, 0).toFixed(2)}
