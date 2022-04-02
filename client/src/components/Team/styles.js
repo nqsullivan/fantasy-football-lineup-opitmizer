@@ -8,6 +8,16 @@ export default makeStyles((theme) => ({
     smMargin: {
         margin: theme.spacing(1),
     },
+    listItem:{
+        width: '100%',
+        maxWidth: 'lg',
+        marginTop: "1rem",
+        backgroundColor: "white",
+    },
+    liText: {
+        marginTop: "auto",
+        marginBottom: "auto",
+    },
     actionDiv: {
         textAlign: 'center',
     },
