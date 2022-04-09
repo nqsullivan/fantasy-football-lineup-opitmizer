@@ -31,10 +31,10 @@ const Team = ({setCurrentId}) => {
                     <ListItem className={classes.listItem}>
                         <Grid container alignItems="center">
                             <Grid item container xs={2} md={2}>
-                                <Typography item display={"inline"} className={ classes.liText} variant="h5">QB:</Typography>
+                                <Typography display={"inline"} className={ classes.liText} variant="h5">QB:</Typography>
                             </Grid>
                             <Grid item container xs={10} md={10}>
-                                <Typography item display={"inline"} className={ classes.liText}>Please add a Quarterback</Typography>
+                                <Typography display={"inline"} className={ classes.liText}>Please add a Quarterback</Typography>
                             </Grid>
                         </Grid>
                     </ListItem>}
@@ -46,10 +46,10 @@ const Team = ({setCurrentId}) => {
                     <ListItem className={classes.listItem}>
                         <Grid container alignItems="center">
                             <Grid item container xs={2} md={2}>
-                                <Typography item display={"inline"} className={ classes.liText} variant="h5">RB:</Typography>
+                                <Typography display={"inline"} className={ classes.liText} variant="h5">RB:</Typography>
                             </Grid>
                             <Grid item container xs={10} md={10}>
-                                <Typography item display={"inline"} className={ classes.liText}>Please add a Running Back</Typography>
+                                <Typography display={"inline"} className={ classes.liText}>Please add a Running Back</Typography>
                             </Grid>
                         </Grid>
                     </ListItem>}
@@ -61,10 +61,10 @@ const Team = ({setCurrentId}) => {
                     <ListItem className={classes.listItem}>
                         <Grid container alignItems="center">
                             <Grid item container xs={2} md={2}>
-                                <Typography item display={"inline"} className={ classes.liText} variant="h5">WR:</Typography>
+                                <Typography display={"inline"} className={ classes.liText} variant="h5">WR:</Typography>
                             </Grid>
                             <Grid item container xs={10} md={10}>
-                                <Typography item display={"inline"} className={ classes.liText}>Please add a Wide Receiver</Typography>
+                                <Typography display={"inline"} className={ classes.liText}>Please add a Wide Receiver</Typography>
                             </Grid>
                         </Grid>
                     </ListItem>}
@@ -76,10 +76,10 @@ const Team = ({setCurrentId}) => {
                     <ListItem className={classes.listItem}>
                         <Grid container alignItems="center">
                             <Grid item container xs={2} md={2}>
-                                <Typography item display={"inline"} className={ classes.liText} variant="h5">TE:</Typography>
+                                <Typography display={"inline"} className={ classes.liText} variant="h5">TE:</Typography>
                             </Grid>
                             <Grid item container xs={10} md={10}>
-                                <Typography item display={"inline"} className={ classes.liText}>Please add a Tight End</Typography>
+                                <Typography display={"inline"} className={ classes.liText}>Please add a Tight End</Typography>
                             </Grid>
                         </Grid>
                     </ListItem>}
@@ -92,10 +92,10 @@ const Team = ({setCurrentId}) => {
                     <ListItem className={classes.listItem}>
                         <Grid container alignItems="center">
                             <Grid item container xs={2} md={2}>
-                                <Typography item display={"inline"} className={ classes.liText} variant="h5">DEF:</Typography>
+                                <Typography display={"inline"} className={ classes.liText} variant="h5">DEF:</Typography>
                             </Grid>
                             <Grid item container xs={10} md={10}>
-                                <Typography item display={"inline"} className={ classes.liText}>Please add a Defensive Player</Typography>
+                                <Typography display={"inline"} className={ classes.liText}>Please add a Defensive Player</Typography>
                             </Grid>
                         </Grid>
                     </ListItem>}
@@ -107,10 +107,10 @@ const Team = ({setCurrentId}) => {
                         <ListItem className={classes.listItem}>
                             <Grid container alignItems="center">
                                 <Grid item container xs={2} md={2}>
-                                    <Typography item display={"inline"} className={ classes.liText} variant="h5">K:</Typography>
+                                    <Typography display={"inline"} className={ classes.liText} variant="h5">K:</Typography>
                                 </Grid>
                                 <Grid item container xs={10} md={10}>
-                                    <Typography item display={"inline"} className={ classes.liText}>Please add a Kicker</Typography>
+                                    <Typography display={"inline"} className={ classes.liText}>Please add a Kicker</Typography>
                                 </Grid>
                             </Grid>
                         </ListItem>}

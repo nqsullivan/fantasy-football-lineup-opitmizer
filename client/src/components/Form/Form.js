@@ -39,7 +39,7 @@ const Form = ({currentId, setCurrentId}) => {
                 <Typography variant={"h6"}>Add a Player</Typography>
                 <TextField name={"name"} variant={"outlined"} label={"Name"} fullWidth value={playerData.name} onChange={(e) => {e.preventDefault(); setPlayerData({ ...playerData, name: e.target.value })}}/>
                 <TextField name={"number"} variant={"outlined"} label={"Number"} fullWidth value={playerData.number} onChange={(e) => {e.preventDefault(); setPlayerData({ ...playerData, number: e.target.value })}}/>
-                <TextField onChange={(e) => setPlayerData({ ...playerData, position: e.target.value})} variant={'outlined'} fullWidth select label="Position"
+                <TextField onChange={(e) => setPlayerData({ ...playerData, position: e.target.value})} variant={'outlined'} value={playerData.position ? playerData.position : ''} fullWidth select label="Position"
                 >
                     <MenuItem value={'QB'}>Quarterback</MenuItem>
                     <MenuItem value={'WR'}>Wide Receiver</MenuItem>
@@ -95,6 +95,7 @@ const Form = ({currentId, setCurrentId}) => {
                                     break;
 
                                 case false:
+                                default:
                                     dispatch(updatePlayer(player._id,playerData));
                                     break;
                             }
@@ -110,6 +111,7 @@ const Form = ({currentId, setCurrentId}) => {
                                     dispatch(createPlayer(playerData));
                                     break;
 
+                                default:
                                 case false:
                                     dispatch(createPlayer(playerData));
                                     break;

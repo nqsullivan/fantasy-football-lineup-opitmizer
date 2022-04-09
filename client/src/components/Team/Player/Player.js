@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {
     Avatar,
     Box,
@@ -13,7 +13,7 @@ import useStyles from './styles';
 import { useDispatch, useSelector } from "react-redux";
 import { deletePlayer, makeStarter, makeBench } from "../../../actions/team";
 
-const Player = ({ player, setCurrentId, user, setUser }) => {
+const Player = ({ player, setCurrentId, user }) => {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
