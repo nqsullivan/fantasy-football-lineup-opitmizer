@@ -15,7 +15,7 @@ import {
     Typography
 } from "@material-ui/core";
 
-const Form = ({currentId, setCurrentId}) => {
+const Form = ({ currentId, setCurrentId }) => {
 
     const [playerData, setPlayerData] = useState({name: '',number: '',team:'',position:'',projPoints: '',selectedFile: '',starter: 'false',user: ''});
     const player = useSelector((state) => currentId ? state.team.find((p) => p._id === currentId) : null);

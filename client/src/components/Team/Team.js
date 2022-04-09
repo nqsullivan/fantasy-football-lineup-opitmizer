@@ -1,18 +1,22 @@
 import React, {useState} from 'react';
-import { useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import useStyles from "./styles";
 
 import Player from './Player/Player';
 import {
-    Box,
+    Box, Button,
     Divider, Grid,
-    List, ListItem, Paper, Typography,
+    List, ListItem, Paper, Typography
 } from "@material-ui/core";
 
-const Team = ({setCurrentId}) => {
+import {makeBench, makeStarter} from "../../actions/team";
+
+const Team = ({ setCurrentId }) => {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     const team = useSelector((state) => state.team).filter((player) => player.userId === (user?.result?._id ? user?.result?._id: user?.result?.googleId));
+    const dispatch = useDispatch();
     const starters = team.filter((player) => player.starter);
+    const bench = team.filter((player) => !player.starter);
     const classes = useStyles();
 
     return (
@@ -115,9 +119,44 @@ const Team = ({setCurrentId}) => {
                             </Grid>
                         </ListItem>}
                 </List>
-                <Typography className={classes.totalPoints} align="right" variant={'h5'}>
-                    Total Projected Points: {team.filter((player) => player.starter).reduce((total, player) => total + player.projPoints, 0).toFixed(2)}
-                </Typography>
+                <Paper className={classes.paper}>
+                    <Grid container alignItems="center" direction={'column'}>
+                        <Grid item container justifyContent={'flex-end'}>
+                            <Typography className={classes.totalPoints} align="right" variant={'h5'}>
+                                Total Projected Points: {team.filter((player) => player.starter).reduce((total, player) => total + player.projPoints, 0).toFixed(2)}
+                            </Typography>
+                        </Grid>
+                        <Grid item container>
+                            <Button
+                                variant={"contained"}
+                                color={"primary"}
+                                size={"large"}
+                                fullWidth
+                                sx={{ ml: '1rem' }}
+                                onClick={() => {
+                                    let noneAtPosition = true;
+                                    bench.forEach((benchPlayer) => {
+                                        starters.forEach((starter) => {
+                                            if (starter.position === benchPlayer.position) {
+                                                if (starter.projPoints < benchPlayer.projPoints) {
+                                                    dispatch(makeBench(starter._id));
+                                                    dispatch(makeStarter(benchPlayer._id));
+                                                }
+                                                noneAtPosition = false;
+                                            }
+                                        })
+                                        if(noneAtPosition){
+                                            dispatch(makeStarter(benchPlayer._id));
+                                            starters.push(...bench.filter((player) => player._id === benchPlayer._id), {starter: true});
+                                            bench.splice(bench.indexOf(bench.filter((player) => player._id !== benchPlayer._id)),1);
+                                        }
+                                    })
+                                }}
+                            >Optimize Team
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </Paper>
                 <p/>
                 <Typography align="center" variant={"h5"}>
                     Bench
