@@ -8,6 +8,19 @@ export default makeStyles((theme) => ({
     smMargin: {
         margin: theme.spacing(1),
     },
+    paper: {
+        padding: theme.spacing(2),
+    },
+    listItem:{
+        width: '100%',
+        maxWidth: 'lg',
+        marginTop: "1rem",
+        backgroundColor: "white",
+    },
+    liText: {
+        marginTop: "auto",
+        marginBottom: "auto",
+    },
     actionDiv: {
         textAlign: 'center',
     },
@@ -19,8 +32,6 @@ export default makeStyles((theme) => ({
         align: 'center',
     },
     totalPoints: {
-        align:'right',
-        paddingRight: "2.5rem",
-        backgroundColor: "white",
+        align:'right'
     }
 }));

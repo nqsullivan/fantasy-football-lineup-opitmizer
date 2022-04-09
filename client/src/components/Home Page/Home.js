@@ -9,7 +9,7 @@ import useStyles from './styles';
 const Home = () => {
     const classes = useStyles();
     const [currentId, setCurrentId ] = useState(0);
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+    const [user] = useState(JSON.parse(localStorage.getItem('profile')));
     const dispatch = useDispatch();
 
     useEffect(() => {

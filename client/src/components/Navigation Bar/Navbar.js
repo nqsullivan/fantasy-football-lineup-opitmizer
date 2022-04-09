@@ -28,12 +28,17 @@ const Navbar = () => {
     const open = Boolean(anchorEl);
     const location = useLocation();
 
-    useEffect((user) => {
+    const logout = () => {
+        dispatch({ type: 'LOGOUT' });
+        setUser(null);
+        navigate('/auth');
+    };
+
+    useEffect((user, logout) => {
         const token = user?.token;
 
         if(token){
             const decodedToken = decode(token);
-
             if(decodedToken.exp * 1000 < new Date().getTime()) logout();
         }
         setUser(JSON.parse(localStorage.getItem('profile')));
@@ -45,11 +50,6 @@ const Navbar = () => {
     const handleClose = () => {
         setAnchorEl(null);
     };
-    const logout = () => {
-        dispatch({ type: 'LOGOUT' });
-        setUser(null);
-        navigate('/auth');
-    }
 
     return(
         <AppBar className = {classes.appBar} position='fixed'>
