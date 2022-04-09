@@ -6,12 +6,13 @@ import Player from './Player/Player';
 import {
     Box,
     Divider, Grid,
-    List, ListItem,Paper, Typography,
+    List, ListItem, Paper, Typography,
 } from "@material-ui/core";
 
 const Team = ({setCurrentId}) => {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     const team = useSelector((state) => state.team).filter((player) => player.userId === (user?.result?._id ? user?.result?._id: user?.result?.googleId));
+    const starters = team.filter((player) => player.starter);
     const classes = useStyles();
 
     return (
@@ -22,9 +23,9 @@ const Team = ({setCurrentId}) => {
                 </Typography>
 
                 <List className={classes.list} >
-                    {team.filter((player) => (player.starter && (player.position === 'QB'))).length > 0 ? (team.filter((player) => (player.starter && (player.position === 'QB'))).map((player) =>(
+                    {starters.filter((player) => (player.position === 'QB')).length > 0 ? (starters.filter((player) => (player.position === 'QB')).map((player) =>(
                         <React.Fragment key={player._id}>
-                            <Player player={player} setCurrentId={setCurrentId}/>
+                            <Player player={player} setCurrentId={setCurrentId} user={user} setUser={setUser}/>
                             <Divider/>
                         </React.Fragment>))) :
                     <ListItem className={classes.listItem}>
@@ -37,78 +38,79 @@ const Team = ({setCurrentId}) => {
                             </Grid>
                         </Grid>
                     </ListItem>}
-                    {team.filter((player) => (player.starter && (player.position === 'RB'))).length > 0 ? (team.filter((player) => (player.starter && (player.position === 'RB'))).map((player) =>(
-                            <React.Fragment key={player._id}>
-                                <Player player={player} setCurrentId={setCurrentId}/>
-                                <Divider/>
-                            </React.Fragment>))) :
-                        <ListItem className={classes.listItem}>
-                            <Grid container alignItems="center">
-                                <Grid item container xs={2} md={2}>
-                                    <Typography display={"inline"} className={ classes.liText} variant="h5">RB:</Typography>
-                                </Grid>
-                                <Grid item container xs={10} md={10}>
-                                    <Typography display={"inline"} className={ classes.liText}>Please add a Runningback</Typography>
-                                </Grid>
+                    {starters.filter((player) => (player.position === 'RB')).length > 0 ? (starters.filter((player) => (player.position === 'RB')).map((player) =>(
+                        <React.Fragment key={player._id}>
+                            <Player player={player} setCurrentId={setCurrentId} user={user} setUser={setUser}/>
+                            <Divider/>
+                        </React.Fragment>))) :
+                    <ListItem className={classes.listItem}>
+                        <Grid container alignItems="center">
+                            <Grid item container xs={2} md={2}>
+                                <Typography item display={"inline"} className={ classes.liText} variant="h5">RB:</Typography>
                             </Grid>
-                        </ListItem>}
-                    {team.filter((player) => (player.starter && (player.position === 'WR'))).length > 0 ? (team.filter((player) => (player.starter && (player.position === 'WR'))).map((player) =>(
-                            <React.Fragment key={player._id}>
-                                <Player player={player} setCurrentId={setCurrentId}/>
-                                <Divider/>
-                            </React.Fragment>))) :
-                        <ListItem className={classes.listItem}>
-                            <Grid container alignItems="center">
-                                <Grid item container xs={2} md={2}>
-                                    <Typography display={"inline"} className={ classes.liText} variant="h5">WR:</Typography>
-                                </Grid>
-                                <Grid item container xs={10} md={10}>
-                                    <Typography display={"inline"} className={ classes.liText}>Please add a Wide Receiver</Typography>
-                                </Grid>
+                            <Grid item container xs={10} md={10}>
+                                <Typography item display={"inline"} className={ classes.liText}>Please add a Running Back</Typography>
                             </Grid>
-                        </ListItem>}
-                    {team.filter((player) => (player.starter && (player.position === 'TE'))).length > 0 ? (team.filter((player) => (player.starter && (player.position === 'TE'))).map((player) =>(
-                            <React.Fragment key={player._id}>
-                                <Player player={player} setCurrentId={setCurrentId}/>
-                                <Divider/>
-                            </React.Fragment>))) :
-                        <ListItem className={classes.listItem}>
-                            <Grid container alignItems="center">
-                                <Grid item container xs={2} md={2}>
-                                    <Typography display={"inline"} className={ classes.liText} variant="h5">TE:</Typography>
-                                </Grid>
-                                <Grid item container xs={10} md={10}>
-                                    <Typography display={"inline"} className={ classes.liText}>Please add a Tight End</Typography>
-                                </Grid>
+                        </Grid>
+                    </ListItem>}
+                    {starters.filter((player) => (player.position === 'WR')).length > 0 ? (starters.filter((player) => (player.position === 'WR')).map((player) =>(
+                        <React.Fragment key={player._id}>
+                            <Player player={player} setCurrentId={setCurrentId} user={user} setUser={setUser}/>
+                            <Divider/>
+                        </React.Fragment>))) :
+                    <ListItem className={classes.listItem}>
+                        <Grid container alignItems="center">
+                            <Grid item container xs={2} md={2}>
+                                <Typography item display={"inline"} className={ classes.liText} variant="h5">WR:</Typography>
                             </Grid>
-                        </ListItem>}
-                    {team.filter((player) => (player.starter && (player.position === 'DEF'))).length > 0 ? (team.filter((player) => (player.starter && (player.position === 'DEF'))).map((player) =>(
-                            <React.Fragment key={player._id}>
-                                <Player player={player} setCurrentId={setCurrentId}/>
-                                <Divider/>
-                            </React.Fragment>))) :
-                        <ListItem className={classes.listItem}>
-                            <Grid container alignItems="center">
-                                <Grid item container xs={2} md={2}>
-                                    <Typography display={"inline"} className={ classes.liText} variant="h5">DEF:</Typography>
-                                </Grid>
-                                <Grid item container xs={10} md={10}>
-                                    <Typography display={"inline"} className={ classes.liText}>Please add a Defensive Player</Typography>
-                                </Grid>
+                            <Grid item container xs={10} md={10}>
+                                <Typography item display={"inline"} className={ classes.liText}>Please add a Wide Receiver</Typography>
                             </Grid>
-                        </ListItem>}
-                    {team.filter((player) => (player.starter && (player.position === 'K'))).length > 0 ? (team.filter((player) => (player.starter && (player.position === 'K'))).map((player) =>(
+                        </Grid>
+                    </ListItem>}
+                    {starters.filter((player) => (player.position === 'TE')).length > 0 ? (starters.filter((player) => (player.position === 'TE')).map((player) =>(
+                        <React.Fragment key={player._id}>
+                            <Player player={player} setCurrentId={setCurrentId} user={user} setUser={setUser}/>
+                            <Divider/>
+                        </React.Fragment>))) :
+                    <ListItem className={classes.listItem}>
+                        <Grid container alignItems="center">
+                            <Grid item container xs={2} md={2}>
+                                <Typography item display={"inline"} className={ classes.liText} variant="h5">TE:</Typography>
+                            </Grid>
+                            <Grid item container xs={10} md={10}>
+                                <Typography item display={"inline"} className={ classes.liText}>Please add a Tight End</Typography>
+                            </Grid>
+                        </Grid>
+                    </ListItem>}
+
+                    {starters.filter((player) => (player.position === 'DEF')).length > 0 ? (starters.filter((player) => (player.position === 'DEF')).map((player) =>(
+                        <React.Fragment key={player._id}>
+                            <Player player={player} setCurrentId={setCurrentId} user={user} setUser={setUser}/>
+                            <Divider/>
+                        </React.Fragment>))) :
+                    <ListItem className={classes.listItem}>
+                        <Grid container alignItems="center">
+                            <Grid item container xs={2} md={2}>
+                                <Typography item display={"inline"} className={ classes.liText} variant="h5">DEF:</Typography>
+                            </Grid>
+                            <Grid item container xs={10} md={10}>
+                                <Typography item display={"inline"} className={ classes.liText}>Please add a Defensive Player</Typography>
+                            </Grid>
+                        </Grid>
+                    </ListItem>}
+                    {starters.filter((player) => (player.position === 'K')).length > 0 ? (starters.filter((player) => (player.position === 'K')).map((player) =>(
                             <React.Fragment key={player._id}>
-                                <Player player={player} setCurrentId={setCurrentId}/>
+                                <Player player={player} setCurrentId={setCurrentId} user={user} setUser={setUser}/>
                                 <Divider/>
                             </React.Fragment>))) :
                         <ListItem className={classes.listItem}>
                             <Grid container alignItems="center">
                                 <Grid item container xs={2} md={2}>
-                                    <Typography display={"inline"} className={ classes.liText} variant="h5">K:</Typography>
+                                    <Typography item display={"inline"} className={ classes.liText} variant="h5">K:</Typography>
                                 </Grid>
                                 <Grid item container xs={10} md={10}>
-                                    <Typography display={"inline"} className={ classes.liText}>Please add a Kicker</Typography>
+                                    <Typography item display={"inline"} className={ classes.liText}>Please add a Kicker</Typography>
                                 </Grid>
                             </Grid>
                         </ListItem>}
@@ -123,7 +125,7 @@ const Team = ({setCurrentId}) => {
                 <List className={classes.list} >
                     {team.filter((player) => !player.starter).map((player) =>(
                         <React.Fragment key={player._id}>
-                            <Player player={player} setCurrentId={setCurrentId} starter={false}/>
+                            <Player player={player} setCurrentId={setCurrentId} user={user} setUser={setUser}/>
                             <Divider/>
                         </React.Fragment>
                     ))}

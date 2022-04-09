@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     Avatar,
     Box,
@@ -10,14 +10,16 @@ import {
 } from "@material-ui/core";
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import useStyles from './styles';
-import {useDispatch} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deletePlayer, makeStarter, makeBench } from "../../../actions/team";
 
-const Player = ({ player, setCurrentId }) => {
+const Player = ({ player, setCurrentId, user, setUser }) => {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const dispatch = useDispatch();
+    const team = useSelector((state) => state.team).filter((player) => player.userId === (user?.result?._id ? user?.result?._id: user?.result?.googleId));
+    const starters = team.filter((player) => player.starter);
 
     useEffect(() => {
 
@@ -26,8 +28,6 @@ const Player = ({ player, setCurrentId }) => {
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
-
-
 
     const handleClose = () => {
         setAnchorEl(null);
@@ -51,7 +51,23 @@ const Player = ({ player, setCurrentId }) => {
                 }}
             >
                 <MenuItem onClick={() => setCurrentId(player._id)}>Edit Player</MenuItem>
-                <MenuItem onClick={() => {!player.starter ? dispatch(makeStarter(player._id)): dispatch(makeBench(player._id))}}>Make {player.starter ? 'bench' : 'starter'}</MenuItem>
+                <MenuItem onClick={() => {
+                    if (!player.starter && starters.filter((p) => (p.position === player.position)).length < 1){
+                        dispatch(makeStarter(player._id))
+                    } else {
+                        if(!player.starter && starters.filter((p) => (p.position === player.position)).length > 0){
+                            starters.filter((p) => (p.position === player.position)).forEach((p) => {
+                                dispatch(makeBench(p._id))
+                            })
+                            dispatch(makeStarter(player._id))
+                        } else {
+                            if (player.starter){
+                                dispatch(makeBench(player._id))
+                            }
+                        }
+                    }}}>
+                    Make {player.starter ? 'bench' : 'starter'}
+                </MenuItem>
                 <MenuItem onClick={() => {dispatch(deletePlayer(player._id))}}>Delete</MenuItem>
             </Menu>
             <Typography className={ classes.liText} variant="h5">

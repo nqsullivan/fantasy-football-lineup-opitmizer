@@ -3,7 +3,7 @@ import FileBase from 'react-file-base64';
 import {useDispatch, useSelector} from 'react-redux';
 
 import useStyles from './styles';
-import { createPlayer, updatePlayer } from '../../actions/team';
+import {createPlayer, updatePlayer, makeBench, getTeam} from '../../actions/team';
 import {
     Button,
     Checkbox,
@@ -19,31 +19,14 @@ const Form = ({currentId, setCurrentId}) => {
 
     const [playerData, setPlayerData] = useState({name: '',number: '',team:'',position:'',projPoints: '',selectedFile: '',starter: 'false',user: ''});
     const player = useSelector((state) => currentId ? state.team.find((p) => p._id === currentId) : null);
+    const team = useSelector((state) => state.team);
+    const starters = team?.filter((p) => p.starter === true);
     const classes = useStyles();
     const dispatch = useDispatch();
 
     useEffect(() =>{
         if(player) setPlayerData(player)
     },[player])
-
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        if(currentId){
-            dispatch(updatePlayer(currentId, playerData));
-        } else {
-            dispatch(createPlayer(playerData));
-        }
-
-        clear();
-
-    }
-
-    const handleChange = (e) => {
-        e.preventDefault();
-        playerData.starter = !playerData.starter
-    }
 
     const clear = () =>{
         setPlayerData({name: '',number: '',team:'',position:'',projPoints: '',selectedFile: '',starter: 'false',user: ''});
@@ -52,7 +35,7 @@ const Form = ({currentId, setCurrentId}) => {
 
     return (
         <Paper className={classes.paper}>
-            <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
+            <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`}>
                 <Typography variant={"h6"}>Add a Player</Typography>
                 <TextField name={"name"} variant={"outlined"} label={"Name"} fullWidth value={playerData.name} onChange={(e) => {e.preventDefault(); setPlayerData({ ...playerData, name: e.target.value })}}/>
                 <TextField name={"number"} variant={"outlined"} label={"Number"} fullWidth value={playerData.number} onChange={(e) => {e.preventDefault(); setPlayerData({ ...playerData, number: e.target.value })}}/>
@@ -70,14 +53,74 @@ const Form = ({currentId, setCurrentId}) => {
                 <Grid container justifyContent={'center'}>
                     <Grid item md={6} xs={6}>
                         <FormGroup>
-                            <FormControlLabel control={<Checkbox onChange={(e, checked)=>{e.preventDefault(); setPlayerData({ ...playerData, starter: checked})}} label={'starter?'} inputProps={{ 'aria-label': 'controlled' }}/>} label="Starter?" />
+                            <FormControlLabel
+                                control={
+                                <Checkbox
+                                    onChange={
+                                        (e, checked)=>{e.preventDefault();
+                                        setPlayerData({ ...playerData, starter: checked})}
+                                }
+                                    label={'starter?'}
+                                     inputProps={{ 'aria-label': 'controlled' }}/>}
+                                    label="Starter?"
+                            />
                         </FormGroup>
                     </Grid>
                     <Grid item className={classes.fileInput} container md={6} xs={6} justifyContent={'center'}>
-                        <FileBase type={"file"} multiple={false} onDone={({base64}) => setPlayerData({...playerData, selectedFile: base64 })}/>
+                        <FileBase
+                            type={"file"}
+                            multiple={false}
+                            onDone={
+                                ({base64}) => setPlayerData({...playerData, selectedFile: base64 })
+                            }
+                        />
                     </Grid>
                 </Grid>
-                <Button className={classes.buttonSubmit} variant={"contained"} color={"primary"} size={"large"} type ="submit" fullWidth>Submit</Button>
+                <Button
+                    className={classes.buttonSubmit}
+                    variant={"contained"}
+                    color={"primary"}
+                    size={"large"}
+                    fullWidth
+                    onClick={() => {
+                        if(currentId){
+                            switch(playerData.starter){//if the created player is a starter then we check if there is already a starter else we create the new player
+                                case true:
+                                    if(starters.filter((p) => (p.position === playerData.position)).length > 0){
+                                        starters.filter((p) => (p.position === playerData.position)).forEach((p) => {
+                                            dispatch(makeBench(p._id))
+                                        })
+                                    }
+                                    dispatch(updatePlayer(player._id,playerData));
+                                    break;
+
+                                case false:
+                                    dispatch(updatePlayer(player._id,playerData));
+                                    break;
+                            }
+                        }else{
+                            switch(playerData.starter){//if the created player is a starter then we check if there is already a starter else we create the new player
+                                case true:
+                                    if(starters.filter((p) => (p.position === playerData.position)).length > 0){
+                                        starters.filter((p) => (p.position === playerData.position)).forEach((p) => {
+                                            dispatch(makeBench(p._id));
+                                            console.log(playerData.name + ' ' + p.name);
+                                        })
+                                    }
+                                    dispatch(createPlayer(playerData));
+                                    break;
+
+                                case false:
+                                    dispatch(createPlayer(playerData));
+                                    break;
+                            }
+                        }
+                        dispatch(getTeam());
+                        clear();
+                    }
+                }>
+                    Submit
+                </Button>
                 <Button variant={"contained"} color={"secondary"} size={"small"} onClick={clear} fullWidth>Clear</Button>
             </form>
         </Paper>
