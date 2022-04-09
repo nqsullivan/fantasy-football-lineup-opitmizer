@@ -23,10 +23,10 @@ export const createPlayer = (player) => async (dispatch) => {
     }
 }
 
-export const updatePlayer = (id, player) => async (dispatch) => {
+export const updatePlayer = (_id, player) => async (dispatch) => {
     try{
 
-        const { data }  = await api.updatePlayer(id, player);
+        const { data }  = await api.updatePlayer(_id, player);
 
         dispatch({ type: UPDATE, payload: data })
     }catch (error){
