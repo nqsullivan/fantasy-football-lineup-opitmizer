@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const API = axios.create({ baseUrl: 'http://localhost:5000' });
+const API = axios.create({ baseUrl: 'https://fantasy-football-100.herokuapp.com' });
+
 
 API.interceptors.request.use((req) => {
     if(localStorage.getItem('profile')) {
